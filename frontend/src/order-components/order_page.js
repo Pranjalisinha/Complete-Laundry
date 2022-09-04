@@ -15,12 +15,13 @@ const OrderPage = ()=>{
     const Authtoken=localStorage.getItem("authorization")
     const [orderhistory,setorderhistory]=useState(false)
     const [viewdata, setViewdata] = useState([]);
+    const [query, setQuery] = useState("")
  
     useEffect(() => {
         if(Authtoken){
             axios({
                 method:'GET',
-                url:'http://localhost:3001/order/create-order',
+                url:'https://laundry-serverapp.herokuapp.com/order/create-order',
                 headers:{
                     authorization:Authtoken
                 }
@@ -33,6 +34,10 @@ const OrderPage = ()=>{
         }
         
     }, [])
+    // const querHandle = (e)=>{
+    //     setQuery(e.target.value);
+    // }
+     console.log(query);
 
     const handleView = (data) =>{
         setViewdata(data);
@@ -48,7 +53,7 @@ const OrderPage = ()=>{
         <div className="class">
         <Link to="/create-order"><button className="create">Create</button></Link>
         <img className='magnifine' src="/images/search.png" alt=""/>
-        <input type="search1" className="search"/>
+        <input type="search1"  onChange={event => setQuery(event.target.value)} className="search"/>
         </div>
         <table className="order_table" style={{border: "none"}}>
             <tr>
@@ -82,7 +87,13 @@ const OrderPage = ()=>{
             </tr>
             </table>
             <div>
-            {orderData.map((data, index)=>{
+            {orderData.filter(viewdata =>{
+                if(query === ""){
+                    return viewdata;
+                } else if(viewdata.orderId === query){
+                    return viewdata;
+                }
+            }).map((data, index)=>{
                 return(
 
                     <div key={index} className="order_data">

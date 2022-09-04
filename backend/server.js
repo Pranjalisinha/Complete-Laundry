@@ -8,10 +8,10 @@ const orderController = require("./routes/order")
 const register = require("./routes/register&signin")
 //console.log(productController)
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit:"30mb", extended: true}));
 app.use(express.urlencoded({extended: false}));
 
-app.listen(3001,(err)=>{
+app.listen(process.env.PORT || 3001,(err)=>{
     if(!err){
         console.log("Server connected succesfully at 3001")
     }
@@ -21,7 +21,7 @@ app.listen(3001,(err)=>{
 });
 //mongodb+srv://Sakshi09:test123@instaclone.gwk4cly.mongodb.net/laundry?retryWrites=true&w=majority
 const laundryDB= "mongodb+srv://Sakshi09:test123@instaclone.gwk4cly.mongodb.net/laundry?retryWrites=true&w=majority"
-mongoose.connect(laundryDB,(data)=>{
+mongoose.connect(laundryDB, (data)=>{
     console.log("Successfully connect to db")
 },(err)=>{
     console.log(err)
