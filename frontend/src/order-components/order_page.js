@@ -12,6 +12,7 @@ const OrderPage = ()=>{
     const Navigate=useNavigate();
     const [summary, setSummary] = useState(false);
     const [orderData, setOrderData] = useState([]);
+    const [get,setget] = useState(true)
     const Authtoken=localStorage.getItem("authorization")
     const [orderhistory,setorderhistory]=useState(false)
     const [viewdata, setViewdata] = useState([]);
@@ -42,6 +43,34 @@ const OrderPage = ()=>{
     const handleView = (data) =>{
         setViewdata(data);
     }
+    const selecthandler = (e)=>{
+        if(e.target.value==="Store Location"){
+           setget(!get)
+        }else{
+          const newdata = orderData.filter((item)=>{
+            if(item.storeInfo.address === e.target.value){
+                return item;
+            }
+
+           })
+           setOrderData(newdata)
+        }
+        console.log(orderData)
+      }
+      const selecthandlerC = (e)=>{
+        if(e.target.value==="City"){
+            setOrderData(orderData)
+           setget(!get)
+        }else{
+          const newdata = orderData.filter((item)=>{
+            if(item.storeInfo.name === e.target.value){
+                return item;
+            }
+           })
+           setOrderData(newdata)
+        }
+        console.log(orderData)
+      }
     console.log(viewdata)
     return (
         <>
@@ -64,10 +93,20 @@ const OrderPage = ()=>{
                     Order Date & Time
                 </th>
                 <th style={{width:"140px"}}>
-                    Store Location
+                <select className="select" onChange={(e)=>selecthandler(e)}>
+                <option value="Store Location">Store Location</option>
+                <option value="Phone booth,10th Road">Phone booth,10th Road</option>
+                <option value="Near J-D Hall,11th strit" >Near J-D Hall,11th strit</option>
+                <option value="Sindhari ,By pass" >Sindhari ,By pass</option>
+              </select>
                 </th>
                 <th style={{width:"100px"}}>
-                    City
+                <select className="select" onChange={(e)=>selecthandlerC(e)}>
+                <option value="City">City</option>
+                <option value="Jp Nagar">Jp Nagar</option>
+                <option value="Alkapuri" >Alkapuri</option>
+                <option value="Pink City" >Pink City</option>
+              </select>
                 </th>
                 <th style={{width:"100px"}}>
                     Store Phone
