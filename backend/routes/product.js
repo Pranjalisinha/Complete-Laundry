@@ -19,7 +19,7 @@ router.post("/create-order",(req,res)=>{
     }
     const day = today.toLocaleDateString("en-Us", option);
     const time = today.toLocaleTimeString("en-Us", option1);
-    const date = day + " " + time;   
+    // const date = day + " " + time;   
     try {
         const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY );
         Users.find({Email: user}).then((data)=>{
@@ -28,7 +28,8 @@ router.post("/create-order",(req,res)=>{
                 productModal.create({ 
                     userId : req.body.userId,
                     orderId :req.body.orderId,
-                    dateTime : date,
+                    date : day,
+                    Time : time,
                     storeInfo : req.body.storeInfo,
                    
                     status : req.body.status,

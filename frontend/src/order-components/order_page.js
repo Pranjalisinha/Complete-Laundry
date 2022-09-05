@@ -140,7 +140,7 @@ const OrderPage = ()=>{
                     {data.orderId}
                     </div>
                     <div className="order_p" style={{width: "180px"}}>
-                    {data.dateTime}
+                    {data.date}{data.Time}
                     </div>
                     <div className="order_p" style={{width: "150px"}}>
                     {data.storeInfo.address}

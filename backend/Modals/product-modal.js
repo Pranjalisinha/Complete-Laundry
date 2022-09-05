@@ -9,7 +9,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dateTime:{
+    date:{
+        type: String,
+        required: true,
+    },
+    Time:{
         type: String,
         required: true,
     },
